@@ -1,13 +1,33 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-
-import "./App.css";
-import MovieList from "./Components/MovieList";
+import useSearchMovies from "./Hooks/useSearchMovies";
 
 function App() {
+  const [search, setSearch] = useState("");
+
+  const { movies, loading, error } = useSearchMovies(search);
+
   return (
     <div>
-      <MovieList />
+      <h1>Movie Search</h1>
+
+      <input
+        type="text"
+        placeholder="Search Movie"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      {loading && <h2>Loading...</h2>}
+
+      {error && <h2>{error}</h2>}
+
+      {movies.map((movie) => (
+        <div key={movie.imdbID}>
+          <h3>{movie.Title}</h3>
+          <img src={movie.Poster} alt={movie.Title} width="150" />
+          <p>{movie.Year}</p>
+        </div>
+      ))}
     </div>
   );
 }
