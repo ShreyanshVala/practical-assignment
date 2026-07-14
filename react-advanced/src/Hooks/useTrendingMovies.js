@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 
-function useFetchData(url) {
+function useTrendingMovies() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMovies = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch("https://fakestoreapi.com/products");
 
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error("Failed to fetch movies");
         }
 
         const result = await response.json();
 
-        setData(result);
+        setData(result.results);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -24,10 +24,14 @@ function useFetchData(url) {
       }
     };
 
-    fetchData();
-  }, [url]);
+    fetchMovies();
+  }, []);
 
-  return { data, loading, error };
+  return {
+    data,
+    loading,
+    error,
+  };
 }
 
-export default useFetchData;
+export default useTrendingMovies;
