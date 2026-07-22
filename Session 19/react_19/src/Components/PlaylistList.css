@@ -1,0 +1,30 @@
+.playlist-container {
+  width: 500px;
+  margin: 20px auto;
+}
+
+.playlist-container h2 {
+  text-align: center;
+}
+
+.song-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f4f4;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: darkred;
+}
